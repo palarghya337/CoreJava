@@ -20,7 +20,6 @@ public class SequenceUsingMultipleThread {
 class SUMThread implements Runnable {
 	
 	private int number;
-	private ThreadLocal<Integer> supportCount = ThreadLocal.withInitial(() -> number + 3);
 	
 	@Override
 	public void run() {
@@ -28,20 +27,18 @@ class SUMThread implements Runnable {
 		while (number < 10) {
 			synchronized (this) {
 				
-				int count = supportCount.get();
-				Log.logInfo("{0}-> {1} - {2}", Thread.currentThread().getName(), number, count);
+				Log.logInfo("{0}-> {1}", Thread.currentThread().getName(), number);
 				number++;
-//				Log.logInfo(Thread.currentThread().getName() + "Test" + supportCount.get());
-//				notify();
+				notifyAll();
 				try {
-					while (number != count) {
-						this.wait(1000);
-					}
+					this.wait();
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
-				supportCount.set(number + 2);
 			}
+		}
+		synchronized (this) {
+			notifyAll();
 		}
 	}
 }
