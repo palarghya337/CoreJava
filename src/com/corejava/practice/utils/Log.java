@@ -1,6 +1,7 @@
 package com.corejava.practice.utils;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.corejava.practice.exceptions.InvalidOperationException;
@@ -20,7 +21,9 @@ public final class Log {
 		String message = format.format(arguments);
 		logger.info(message);
 	}
-	public static void logInfo(String message) {
-		logger.info(message);
-	}
+
+  public static void logInfo(Object object) {
+    String message = Objects.toString(object, "null");
+    logger.info(message);
+  }
 }
