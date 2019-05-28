@@ -2,9 +2,6 @@ package com.corejava.practice.multithreading;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.IntStream;
-
-import com.corejava.practice.utils.Log;
 
 public class FixedThreadPoolExample {
   
