@@ -2,9 +2,6 @@ package com.corejava.practice.multithreading;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.IntStream;
-
-import com.corejava.practice.utils.Log;
 
 public class SingleThreadPoolExample {
 
@@ -26,27 +23,5 @@ public class SingleThreadPoolExample {
 		service.execute(new Task("C"));
 		service.execute(new Task("D"));
 		service.shutdown();
-	}
-}
-class Task implements Runnable {
-	
-	private String taskName;
-	public Task(String taskName) {
-		this.taskName = taskName;
-	}
-	@Override
-	public void run() {
-		IntStream.range(0, 5).forEach(index -> {
-			sleep(500);
-			Log.logInfo("Task {0} is executing -> {1}", this.taskName, index);
-		});
-	}
-	public void sleep(long milis) {
-		try {
-			Thread.sleep(milis);
-		} catch (InterruptedException ie) {
-			Log.logInfo("Exception: {0}", ie.getMessage());
-			Thread.currentThread().interrupt();
-		}
 	}
 }

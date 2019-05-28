@@ -12,33 +12,10 @@ public class FixedThreadPoolExample {
 
     ExecutorService pool = Executors.newFixedThreadPool(2);
     
-    pool.execute(new CountDownClockFixed("A"));
-    pool.execute(new CountDownClockFixed("B"));
-    pool.execute(new CountDownClockFixed("C"));
-    pool.execute(new CountDownClockFixed("D"));
+    pool.execute(new Task("A"));
+    pool.execute(new Task("B"));
+    pool.execute(new Task("C"));
+    pool.execute(new Task("D"));
     pool.shutdown();
-  }
-}
-
-class CountDownClockFixed implements Runnable {
-
-  private String clockName;
-  public CountDownClockFixed(String clockName) {
-    this.clockName = clockName;
-  }
-
-  public void run() {
-
-    String threadName = Thread.currentThread().getName();
-    IntStream.range(0, 5).forEach(i -> {
-
-      Log.logInfo("{0} -> {1}: {2}", threadName, clockName, i);
-      try {
-        Thread.sleep(1000);
-      } catch (InterruptedException e) {
-        Log.logInfo("Exception: {0}", e.getMessage());
-        Thread.currentThread().interrupt();
-      }
-    });
   }
 }
