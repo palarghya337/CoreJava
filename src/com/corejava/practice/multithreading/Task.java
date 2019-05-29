@@ -1,14 +1,17 @@
 package com.corejava.practice.multithreading;
 
 import java.util.stream.IntStream;
+
 import com.corejava.practice.utils.Log;
 
 public class Task implements Runnable {
 	
 	private String taskName;
+
 	public Task(String taskName) {
 		this.taskName = taskName;
 	}
+
 	@Override
 	public void run() {
 		IntStream.range(0, 5).forEach(index -> {
