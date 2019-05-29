@@ -1,6 +1,9 @@
 package com.corejava.practice.beans;
 
 /**
+ * This class implements {@linkplain Comparable} interface for sorting purpose.
+ * At the time of sorting this class object it will sort by project, team and
+ * name respectively.
  * @author Bittu
  *
  */
@@ -40,7 +43,41 @@ public class Employee implements Comparable<Employee> {
 		return designation;
 	}
 
-	@Override
+  /* Why do we need setter methods when we can easily expose the fields?
+   * Answer: If you expose the fields then you cannot add any logic in
+   * future if needed to validate the data. Let say you want to restrict
+   * to set the empID, it should be greater than 20000. You can not do
+   * that if you expose the fields but if you have setter method then you
+   * can achieve this.
+   * Another scenario is when you want your Class to be immutable, if you
+   * allow field access then you are breaking the immutability of your
+   * class since values can be changed. But if you carefully design your
+   * class with getters and no setters you keep the immutability intact.
+   * Though in such cases you have to be careful in getter method to ensure
+   * you don't give out reference of objects(in case your class have
+   * object as instances).
+   **/
+  public void setEmpID(int empID) {
+    this.empID = empID;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setProject(String project) {
+    this.project = project;
+  }
+
+  public void setTeam(String team) {
+    this.team = team;
+  }
+
+  public void setDesignation(String designation) {
+    this.designation = designation;
+  }
+
+  @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
