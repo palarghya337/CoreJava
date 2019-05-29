@@ -3,7 +3,7 @@ package com.corejava.practice.multithreading;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SingleThreadPoolExample {
+public class SingleThreadExecutorExample {
 
 	public static void main(String[] args) {
 		/* Creates an Executor that uses a single worker thread
