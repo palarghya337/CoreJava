@@ -1,7 +1,9 @@
 package com.corejava.practice.multithreading;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.stream.IntStream;
 
 import com.corejava.practice.utils.Log;
 
@@ -19,90 +21,72 @@ public class ProducerConsumerProblem {
 
   public static void main(String[] args) {
 
-    BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
+    MyBlockingQueue<Integer> queue = new MyBlockingQueue<>(10);
+    new LinkedBlockingQueue<>();
     // Thread-1 is the producer thread.
-    Thread producerThread = new Thread(new Producer(queue));
-    Thread consumerThread = new Thread(new Consumer(queue));
-    producerThread.start();
-    consumerThread.start();
+    Runnable producer = () -> IntStream.range(0, 4).forEach(index -> {
+      queue.put(index);
+      Log.logInfo("Thread: {0}, Produced: {1}", Thread.currentThread().getName(), index);
+    });
+    Runnable consumer = () -> {
+      while (true) {
+        Log.logInfo("Thread: {0}, Consumed: {1}", Thread.currentThread().getName(), queue.take());
+      }
+    };
+
+    Thread proThread = new Thread(producer);
+    Thread conThread = new Thread(consumer);
+    proThread.start();
+    conThread.start();
   }
 }
 
-class Producer implements Runnable {
+class MyBlockingQueue<E> {
 
-  private BlockingQueue<Integer> queue;
-  private Integer data = 0;
+  private int maxSize = 16;
+  private Queue<E> queue;
+  private Object full = new Object();
+  private Object empty = new Object();
 
-  public Producer(BlockingQueue<Integer> queue) {
-    this.queue = queue;
+  public MyBlockingQueue(int size) {
+    this.maxSize = size;
+    queue = new LinkedList<>();
   }
 
-  @Override
-  public void run() {
-    produce();
-  }
-
-  private void produce() {
-
-    synchronized (queue) {
-      while (!queue.isEmpty()) {
+  public boolean put(E value) {
+    synchronized (full) {
+      while (queue.size() == maxSize) {
         try {
-          Log.logInfo("Need to wait as consumer is consuming the data.");
-          queue.wait();
+          full.wait();
         } catch (InterruptedException e) {
           Log.logInfo("Exception: {0}", e.getMessage());
           Thread.currentThread().interrupt();
         }
       }
     }
-    while (queue.size() != 10) {
-      try {
-        queue.add(data);
-        Log.logInfo(Thread.currentThread().getName() + " produced: " + data);
-        data++;
-      } catch (Exception e) {
-        Log.logInfo("Queue is full.");
-      }
-    }
-    synchronized (queue) {
-      queue.notifyAll();
+    synchronized (empty) {
+      boolean isAdded = queue.add(value);
+      empty.notifyAll();
+      return isAdded;
     }
   }
-}
 
-class Consumer implements Runnable {
+  public E take() {
 
-  private BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
-
-  public Consumer(BlockingQueue<Integer> queue) {
-    this.queue = queue;
-  }
-
-  @Override
-  public void run() {
-
-    synchronized (queue) {
-      while (queue.size() != 10) {
+    synchronized (empty) {
+      while (queue.isEmpty()) {
         try {
-          Log.logInfo("Need to wait as producer is producing the data.");
-          queue.wait();
+          empty.wait();
         } catch (InterruptedException e) {
           Log.logInfo("Exception: {0}", e.getMessage());
           Thread.currentThread().interrupt();
         }
       }
     }
-    while (!queue.isEmpty()) {
-      try {
-
-        Integer data = queue.remove();
-        Log.logInfo(Thread.currentThread().getName() + " consumed: " + data);
-      } catch (Exception e) {
-        Log.logInfo("Queue is empty");
-      }
-    }
-    synchronized (queue) {
-      queue.notifyAll();
+    synchronized (full) {
+      E value = queue.remove();
+      full.notifyAll();
+      return value;
     }
   }
 }
