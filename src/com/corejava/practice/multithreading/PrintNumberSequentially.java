@@ -15,7 +15,7 @@ public class PrintNumberSequentially {
 	public static void main(String[] args) {
 
     PrintNumber obj = new PrintNumber(10);
-    IntStream.range(0, 3).forEach(index -> new Thread(obj).start());
+    IntStream.range(0, 20).forEach(index -> new Thread(obj).start());
 	}
 }
 class PrintNumber implements Runnable {
