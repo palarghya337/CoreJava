@@ -6,8 +6,8 @@ import com.corejava.practice.utils.Log;
  * This is an example where number will be printed sequentially
  * using two threads in which thread 1 will print even numbers
  * and thread two will print odd numbers.
+ * 
  * @author Bittu
- *
  */
 public class PrintNumberSequentiallyUsingTwoThread {
 
