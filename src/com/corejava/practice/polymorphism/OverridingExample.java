@@ -14,6 +14,7 @@ public class OverridingExample extends Parent {
     } catch (CheckedException e1) {
       Log.logInfo("Handled checked exception. {0}", e1.getMessage());
     }
+    overridingExample.method5();
     Parent parent = new OverridingExample();
     try {
       parent.method2();
@@ -43,6 +44,13 @@ public class OverridingExample extends Parent {
   protected void method3() throws Exception {
     System.out.println(getCurrentMethod());
   }*/
+
+  @Override
+  protected String method5() {
+    Log.logInfo(
+        "Overriding is possible by changeing the returntype.\n If child class is returning an object of a sub class type.");
+    return "Returning object of String class";
+  }
 }
 
 class Parent {
@@ -63,6 +71,10 @@ class Parent {
 
   protected void method4() throws CheckedException {
     throw new CheckedException("Throwing checked exception from " + getCurrentMethod());
+  }
+
+  protected Object method5() {
+    return "Returning object of Object class";
   }
 
   protected String getCurrentMethod() {
