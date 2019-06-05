@@ -1,7 +1,5 @@
 package com.corejava.practice.multithreading;
 
-import com.corejava.practice.utils.Log;
-
 /**
  * This is an example where number will be printed sequentially
  * using two threads in which thread 1 will print even numbers
@@ -20,21 +18,20 @@ public class PrintNumberSequentiallyUsingTwoThread {
     t2.start();
 	}
 }
-
 class PrintNumberWithTwoThreads implements Runnable {
-	
+
   private int number = 1;
-	private int range;
-	
+  private int range;
+
   public PrintNumberWithTwoThreads(int range) {
-		this.range = range;
-	}
-	
-	@Override
-	public void run() {
-		
-		while (number < range) {
-			synchronized (this) {
+    this.range = range;
+  }
+
+  @Override
+  public void run() {
+
+    while (number < range) {
+      synchronized (this) {
         /* Checking the condition again because different thread might have
          * updated the number while current thread is waiting to acquire the lock.
          **/
@@ -71,7 +68,7 @@ class PrintNumberWithTwoThreads implements Runnable {
             }
           }
         }
-			}
-		}
-	}
+      }
+    }
+  }
 }
