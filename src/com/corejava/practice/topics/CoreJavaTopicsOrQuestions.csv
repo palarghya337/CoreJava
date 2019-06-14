@@ -2,3 +2,5 @@ Questions
 How class loader works?
 How to create a class as immutable in java which is having many fields?
 In java what is the maximum number of parameter we can declare in a method?
+How many ways we can create an object?
+How to avoid Deserialization process from creating another instance of Singleton class in java?
