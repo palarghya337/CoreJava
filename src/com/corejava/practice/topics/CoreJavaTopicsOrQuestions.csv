@@ -1,6 +1,10 @@
-Questions
-How class loader works?
-How to create a class as immutable in java which is having many fields?
-In java what is the maximum number of parameter we can declare in a method?
-How many ways we can create an object?
-How to avoid Deserialization process from creating another instance of Singleton class in java?
+Questions,
+How class loader works?,
+How to create a class as immutable in java which is having many fields?,
+In java what is the maximum number of parameter we can declare in a method?,
+How many ways we can create an object?,
+How to avoid Deserialization process from creating another instance of Singleton class in java?,Need to override readResolve() method and return the singleton object.
+What is readResolve() method in java?,https://www.math.uni-hamburg.de/doc/java/jdk1.4.1/docs/guide/serialization/spec/input.doc7.html
+What is the difference between Serializable and Externalizable class?,
+What is lazy initialization?,
+Can we access enum constructor from outside?,
