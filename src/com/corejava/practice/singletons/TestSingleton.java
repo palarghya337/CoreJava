@@ -7,6 +7,8 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import com.corejava.practice.utils.Log;
 
@@ -14,15 +16,28 @@ public class TestSingleton {
 
   public static void main(String[] args) {
     
-    String classPathAndName = "com.corejava.practice.singletons.BillPughSingleton";
+    testBillPughSingleton();
+    testSerializableSingleton();
+  }
+
+  /**
+   * 
+   */
+  private static void testBillPughSingleton() {
+    
     try {
-      BillPughSingleton billPughSingleton = (BillPughSingleton) Class.forName(classPathAndName)
-          .newInstance();
+      Class<BillPughSingleton> billPughSingletonClass = BillPughSingleton.class;
+      Constructor<BillPughSingleton> billPughSingletonConstructor = billPughSingletonClass.getDeclaredConstructor();
+      billPughSingletonConstructor.setAccessible(true);
+      BillPughSingleton billPughSingleton = billPughSingletonConstructor.newInstance();
       billPughSingleton.displaySingleton();
-    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+      
+      Log.logInfo("BillPughSingleton1 hashCode:- {0}", billPughSingleton.hashCode()); 
+      Log.logInfo("BillPughSingleton2 hashCode:- {0}", BillPughSingleton.getInstance().hashCode());
+    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException
+        | SecurityException | IllegalArgumentException | InvocationTargetException e) {
       Log.logInfo("Exception: {0}", e);
     }
-    testSerializableSingleton();
   }
 
   /**
@@ -39,7 +54,7 @@ public class TestSingleton {
       SerializableSingleton instance2 = (SerializableSingleton) inStream.readObject();
 
       Log.logInfo("instance1 hashCode:- {0}", instance1.hashCode()); 
-      Log.logInfo("instance2 hashCode:- {0}", instance2.hashCode()); 
+      Log.logInfo("instance2 hashCode:- {0}", instance2.hashCode());
     } catch (ClassNotFoundException | IOException e) {
       Log.logInfo("Exception: {0}", e.getMessage());
     }
