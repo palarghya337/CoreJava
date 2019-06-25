@@ -1,10 +1,16 @@
-Questions,
-How class loader works?,
-How to create a class as immutable in java which is having many fields?,
-In java what is the maximum number of parameter we can declare in a method?,
-How many ways we can create an object?,
-How to avoid Deserialization process from creating another instance of Singleton class in java?,Need to override readResolve() method and return the singleton object.
-What is readResolve() method in java?,https://www.math.uni-hamburg.de/doc/java/jdk1.4.1/docs/guide/serialization/spec/input.doc7.html
-What is the difference between Serializable and Externalizable class?,
-What is lazy initialization?,
-Can we access enum constructor from outside?,
+Topic,Questions,
+Advanced,How class loader works?,
+Immutability,How to create a class as immutable in java which is having many fields?,Need to use builder pattern.
+Advanced,In java what is the maximum number of parameter we can declare in a method?,255
+General,How many ways we can create an object?,
+Serialization&Deserialization,How to avoid Deserialization process from creating another instance of Singleton class in java?,Need to override readResolve() method and return the singleton object.
+Serialization&Deserialization,What is readResolve() method in java?,https://www.math.uni-hamburg.de/doc/java/jdk1.4.1/docs/guide/serialization/spec/input.doc7.html
+Serialization&Deserialization,What is the difference between Serializable and Externalizable class?,
+ObjectCreation,What is lazy initialization?,
+Encaptulation,Can we access enum constructor from outside?,
+General,What is tight coupling and loose coupling?,
+Concurrency,What is Runnable and Callable?,
+General,Can we declare a constructor static? Explain your answer why.,
+General,Can we declare outer class static? Explain your answer why.,
+Collections,How hash map works?,
+Collections,How ConcurrentHashMap works?,
