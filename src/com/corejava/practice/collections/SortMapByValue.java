@@ -9,7 +9,7 @@ import java.util.Map;
 
 import com.corejava.practice.utils.Log;
 
-public class SortByValue {
+public class SortMapByValue {
 
   public static void main(String[] args) {
 
