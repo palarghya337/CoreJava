@@ -31,6 +31,6 @@ public interface ImplementFunctionalInterface {
 	public abstract int hashCode();
 	public static final int SIZE = 10;
 	public enum TYPE {
-		Open, Close
+		OPEN, CLOSE;
 	}
 }
