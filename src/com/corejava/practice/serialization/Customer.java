@@ -4,8 +4,19 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.io.Serializable;
 import java.math.BigInteger;
 
+/**
+ * Like {@linkplain Serializable}, {@linkplain Externalizable} is not a marker interface.
+ * Externalizable has two methods {@link #writeExternal(ObjectOutput)} and
+ * {@link #readExternal(ObjectInput)}.
+ * <br> • When any class in Java implements {@linkplain Externalizable}, then it is your
+ * responsibility to implement Serialization process i.e. preserving all important information.
+ * <br> • you have full control over Serialization process.
+ * @author Bittu
+ *
+ */
 public class Customer implements Externalizable {
 
 	private int age;

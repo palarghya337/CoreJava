@@ -1,4 +1,4 @@
-Topic,Questions,
+Topic,Questions,Answers
 Advanced,How class loader works?,
 Immutability,How to create a class as immutable in java which is having many fields?,Need to use builder pattern.
 Advanced,In java what is the maximum number of parameter we can declare in a method?,255
@@ -9,7 +9,7 @@ Serialization&Deserialization,What is the difference between Serializable and Ex
 ObjectCreation,What is lazy initialization?,
 Encaptulation,Can we access enum constructor from outside?,
 General,What is tight coupling and loose coupling?,
-Concurrency,What is Runnable and Callable?,
+Multi-threading,What is Runnable and Callable?,
 General,Can we declare a constructor static? Explain your answer why.,
 General,Can we declare outer class static? Explain your answer why.,
 Collections,How hash map works?,
@@ -22,3 +22,6 @@ Interface,Can we declare final static method inside an interface? Explain your a
 Interface,What is the difference in between Lambda Expression and Anonymous class?,
 AbstractClass,Can we create object for any abstract Class?,
 Interface,Can we create object for any interface?,
+Interface,What is markar interface?,
+Serialization&Deserialization,Can we serialize static field? Explain your answer why.,"Static Variable. Static variables belong to a class and not to any individual instance. The concept of serialization is concerned with the object's current state. Only data associated with a specific instance of a class is serialized, therefore static member fields are ignored during serialization."
+OOPs,Why java does not support multiple inheritances?,
