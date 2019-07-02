@@ -1,5 +1,8 @@
 Topic,Questions,Answers
 Advanced,How class loader works?,
+Advanced,How class path works in java?,
+Advanced,Can one class be loaded by two different ClassLoader in Java?,
+Advanced,How many class loader present in java?,
 Immutability,How to create a class as immutable in java which is having many fields?,Need to use builder pattern.
 Advanced,In java what is the maximum number of parameter we can declare in a method?,255
 General,How many ways we can create an object?,
@@ -25,3 +28,6 @@ Interface,Can we create object for any interface?,
 Interface,What is markar interface?,
 Serialization&Deserialization,Can we serialize static field? Explain your answer why.,"Static Variable. Static variables belong to a class and not to any individual instance. The concept of serialization is concerned with the object's current state. Only data associated with a specific instance of a class is serialized, therefore static member fields are ignored during serialization."
 OOPs,Why java does not support multiple inheritances?,
+OOPs,What is abstraction?,
+OOPs,What is encaptulation?,
+OOPs,What is the difference between abstraction and encaptulation?,
