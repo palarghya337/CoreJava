@@ -28,6 +28,7 @@ public class CyclicBarrierExample {
 		executorService.execute(example.new CBTask(data, barrier));
 		executorService.execute(example.new CBTask(data, barrier));
 		executorService.shutdown();
+		Log.logInfo("Main method finished");
 	}
 	private class BarrierActionTask implements Runnable {
 		
