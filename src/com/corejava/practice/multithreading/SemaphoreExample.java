@@ -16,7 +16,7 @@ import com.corejava.practice.utils.Log;
  * @author Bittu
  *
  */
-public class SimaphoreExample {
+public class SemaphoreExample {
 
 	public static void main(String[] args) {
 		
@@ -24,7 +24,7 @@ public class SimaphoreExample {
 		Semaphore semaphore = new Semaphore(permits);
 		ArrayBlockingQueue<Runnable> queue =
 				new ArrayBlockingQueue<>(permits);
-		SimaphoreExample example = new SimaphoreExample();
+		SemaphoreExample example = new SemaphoreExample();
 		ExecutorService service =new ThreadPoolExecutor(
 				3, 5, 0, TimeUnit.MILLISECONDS, queue);
 		IntStream.range(0, 20).forEach(i -> {
