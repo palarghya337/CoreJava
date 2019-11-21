@@ -18,19 +18,19 @@ import com.corejava.practice.utils.Log;
 public class TreeSetFalureDemo {
 
 	public static void main(String[] args) {
-		
-    resultWhenObjectWihoutComparableImplementation();
-//	  resultWhenObjectImplementsComparatorInterface();
+
+		resultWhenObjectWihoutComparableImplementation();
+//		resultWhenObjectImplementsComparatorInterface();
 //		resultWhenObjectImplementsComparableInterface();
 	}
 
-  /**
-   * This method will show the result if we are trying to sort an object
-   * which implements {@linkplain Comparator} interface but not {@linkplain Comparable}
-   * interface.
-   */
-  private static void resultWhenObjectImplementsComparatorInterface() {
-		
+	/**
+	 * This method will show the result if we are trying to sort an object
+	 * which implements {@linkplain Comparator} interface but not {@linkplain Comparable}
+	 * interface.
+	 */
+	private static void resultWhenObjectImplementsComparatorInterface() {
+
 		Set<ComparatorImplWithHashAndEquals> set = new TreeSet<>();
 		set.add(new ComparatorImplWithHashAndEquals(42));
 		set.add(new ComparatorImplWithHashAndEquals(52));
@@ -39,25 +39,25 @@ public class TreeSetFalureDemo {
 		Log.logInfo(set.toString());
 	}
 
-  /**
-   * This method will show the result if we are trying to sort an object
-   * which implements {@linkplain Comparable} interface.
-   */
-  private static void resultWhenObjectImplementsComparableInterface() {
-    Set<ComparableImplWithHashAndEquals> set = new TreeSet<>();
-    set.add(new ComparableImplWithHashAndEquals(42));
-    set.add(new ComparableImplWithHashAndEquals(52));
-    set.add(new ComparableImplWithHashAndEquals(29));
-    set.add(new ComparableImplWithHashAndEquals(34));
+	/**
+	 * This method will show the result if we are trying to sort an object
+	 * which implements {@linkplain Comparable} interface.
+	 */
+	private static void resultWhenObjectImplementsComparableInterface() {
+		Set<ComparableImplWithHashAndEquals> set = new TreeSet<>();
+		set.add(new ComparableImplWithHashAndEquals(42));
+		set.add(new ComparableImplWithHashAndEquals(52));
+		set.add(new ComparableImplWithHashAndEquals(29));
+		set.add(new ComparableImplWithHashAndEquals(34));
 		Log.logInfo(set.toString());
 	}
 
-  /**
-   * This method will show the result if we are trying to sort an object
-   * which does not implements {@linkplain Comparable} interface.
-   */
-  private static void resultWhenObjectWihoutComparableImplementation() {
-		
+	/**
+	 * This method will show the result if we are trying to sort an object
+	 * which does not implements {@linkplain Comparable} interface.
+	 */
+	private static void resultWhenObjectWihoutComparableImplementation() {
+
 		Set<WithoutComparableImplementation> set = new TreeSet<>();
 		set.add(new WithoutComparableImplementation(42));
 		set.add(new WithoutComparableImplementation(52));
