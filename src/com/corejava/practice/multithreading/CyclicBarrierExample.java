@@ -13,6 +13,16 @@ import java.util.stream.IntStream;
 
 import com.corejava.practice.utils.Log;
 
+/**
+ * In this example below each task will generate 5 random
+ * numbers and will add that number into data list. Once
+ * all the task have added the numbers then barrier action
+ * task will add all the numbers and will give the final
+ * result.
+ * 
+ * @author Bittu
+ *
+ */
 public class CyclicBarrierExample {
 
 	public static void main(String[] args) {
@@ -20,6 +30,11 @@ public class CyclicBarrierExample {
 		int numberOfThreads = 4;
 		List<Integer> data = new CopyOnWriteArrayList<>();
 		CyclicBarrierExample example = new CyclicBarrierExample();
+		/* Below mentioned task will wait for the other task to
+		 * complete. Once other tasks has completed their task,
+		 * barrier action task will do final task with the result
+		 * of other tasks.
+		 **/
 		BarrierActionTask actionTask = example.new BarrierActionTask(data);
 		CyclicBarrier barrier = new CyclicBarrier(numberOfThreads, actionTask);
 		ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
@@ -30,6 +45,13 @@ public class CyclicBarrierExample {
 		executorService.shutdown();
 		Log.logInfo("Main method finished");
 	}
+	/* This task will always wait for the other task to
+	 * complete first. Once other tasks has completed
+	 * their task, barrier action task will do final task
+	 * with the result of other tasks. 
+	 * 
+	 * @author Bittu
+	 */
 	private class BarrierActionTask implements Runnable {
 		
 		private List<Integer> data;
