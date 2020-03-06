@@ -56,8 +56,8 @@ class MyBlockingQueue<E> {
 
   private int maxSize = 16;
   private Queue<E> queue;
-  private Object full = new Object();
-  private Object empty = new Object();
+  private Object producerLock = new Object();
+  private Object consumerLock = new Object();
 
   public MyBlockingQueue(int size) {
     this.maxSize = size;
@@ -73,21 +73,23 @@ class MyBlockingQueue<E> {
    * @return boolean
    */
   public boolean put(E value) {
-    synchronized (full) {
-      while (queue.size() == maxSize) {
-        try {
-          full.wait();
-        } catch (InterruptedException e) {
-          Log.logInfo("Exception: {0}", e.getMessage());
-          Thread.currentThread().interrupt();
-        }
-      }
-    }
-    synchronized (empty) {
-      boolean isAdded = queue.add(value);
-      empty.notifyAll();
-      return isAdded;
-    }
+	  
+	  boolean isAdded = false;
+	  synchronized (producerLock) {
+		  while (queue.size() == maxSize) {
+			  try {
+				  producerLock.wait();
+			  } catch (InterruptedException e) {
+				  Log.logInfo("Exception: {0}", e.getMessage());
+				  Thread.currentThread().interrupt();
+			  }
+		  }
+		  isAdded = queue.add(value);
+	  }
+	  synchronized (consumerLock) {
+		  consumerLock.notifyAll();
+	  }
+	  return isAdded;
   }
 
   /**
@@ -99,21 +101,22 @@ class MyBlockingQueue<E> {
    */
   public E take() {
 
-    synchronized (empty) {
-      while (queue.isEmpty()) {
-        try {
-          empty.wait();
-        } catch (InterruptedException e) {
-          Log.logInfo("Exception: {0}", e.getMessage());
-          Thread.currentThread().interrupt();
-        }
-      }
-    }
-    synchronized (full) {
-      E value = queue.poll();
-      full.notifyAll();
-      return value;
-    }
+	  E value = null;
+	  synchronized (consumerLock) {
+		  while (queue.isEmpty()) {
+			  try {
+				  consumerLock.wait();
+			  } catch (InterruptedException e) {
+				  Log.logInfo("Exception: {0}", e.getMessage());
+				  Thread.currentThread().interrupt();
+			  }
+		  }
+		  value = queue.poll();
+	  }
+	  synchronized (producerLock) {
+		  producerLock.notifyAll();
+	  }
+	  return value;
   }
 
   /**
