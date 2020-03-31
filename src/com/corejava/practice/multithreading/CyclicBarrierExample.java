@@ -27,7 +27,7 @@ public class CyclicBarrierExample {
 
 	public static void main(String[] args) {
 
-		int numberOfThreads = 4;
+		int numberOfTask = 4;
 		List<Integer> data = new CopyOnWriteArrayList<>();
 		CyclicBarrierExample example = new CyclicBarrierExample();
 		/* Below mentioned task will wait for the other task to
@@ -36,8 +36,8 @@ public class CyclicBarrierExample {
 		 * of other tasks.
 		 **/
 		BarrierActionTask actionTask = example.new BarrierActionTask(data);
-		CyclicBarrier barrier = new CyclicBarrier(numberOfThreads, actionTask);
-		ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
+		CyclicBarrier barrier = new CyclicBarrier(numberOfTask, actionTask);
+		ExecutorService executorService = Executors.newFixedThreadPool(numberOfTask);
 		executorService.execute(example.new CBTask(data, barrier));
 		executorService.execute(example.new CBTask(data, barrier));
 		executorService.execute(example.new CBTask(data, barrier));
@@ -65,6 +65,7 @@ public class CyclicBarrierExample {
 			
 			if (Objects.nonNull(data)) {
 				
+				Log.logInfo("Available Data: {0}", data);
 				int sumOfAll = data.stream().mapToInt(i -> i).sum();
 				Log.logInfo("Sum of all is {0}", sumOfAll);
 			}
@@ -89,7 +90,7 @@ public class CyclicBarrierExample {
 				IntStream.range(0, 5).forEach(i -> localData.add(router.nextInt(15)));
 				int sumOfAll = localData.stream().mapToInt(i -> i).sum();
 				Log.logInfo("{0} = {1}", localData, sumOfAll);
-				data.addAll(localData);
+				data.add(sumOfAll);
 				try {
 					barrier.await();
 				} catch (InterruptedException | BrokenBarrierException e) {

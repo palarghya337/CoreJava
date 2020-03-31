@@ -97,11 +97,20 @@ public class OverridingExample extends Parent {
 				"Overriding is possible by changeing the returntype.\n If child class is returning an object of a sub class type.");
 		return "Returning object of String class";
 	}
+	/**
+	 * The below example is of hiding the method.
+	 * When we create a static method with the same name and
+	 * signature of the parent class, parent class method
+	 * would be hidden and child class method will be shown.
+	 * This is called method hiding.
+	 */
+	//@Override
+	protected static void staticMethod() {
+		Log.logInfo("This is child class static method.");
+	}
 }
 
 class Parent {
-
-  private static final String CLASS_NAME = Parent.class.getSimpleName();
 
   protected void method1() {
     Log.logInfo("Inside {0}", getCurrentMethod());
@@ -122,7 +131,9 @@ class Parent {
   protected Object method5() {
     return "Returning object of Object class";
   }
-
+  protected static void staticMethod() {
+	  Log.logInfo("This is parent class static method.");
+  }
   protected String getCurrentMethod() {
     StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[2];
     StringBuilder builder = new StringBuilder();
