@@ -10,16 +10,5 @@ public class TestInterfaces {
     Log.logInfo("Addition: {0}", fInterfaceObj.addNumbers(10, 20));
     Log.logInfo("Substraction: {0}", fInterfaceObj.substractNumbers(20, 10));
     Log.logInfo("Multiplication: {0}", ImplementFunctionalInterface.multiplyNumbers(20, 10));
-    
-    AClass aa= new AClass(10) {
-	};
   }
-}
-abstract class AClass{
-	
-	int input;
-	public AClass() {}
-	public AClass(int input) {
-		this.input = input;
-	}
 }

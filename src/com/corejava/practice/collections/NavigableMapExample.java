@@ -28,10 +28,7 @@ public class NavigableMapExample {
 		if (Objects.isNull(listOfString) || listOfString.isEmpty()) {
 			throw new RuntimeException("listOfString can not be null");
 		}
-		List<String> startsWithS = listOfString.stream()
-				.filter(i -> i.startsWith("S"))
-				.sorted()
-				.collect(Collectors.toList());
+		List<String> startsWithS = listOfString.stream().filter(i -> i.startsWith("S")).sorted().collect(Collectors.toList());
 		Collections.sort(startsWithS);
 		return startsWithS;
 	}
