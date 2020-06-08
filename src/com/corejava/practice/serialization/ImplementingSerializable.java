@@ -1,12 +1,6 @@
 package com.corejava.practice.serialization;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Base64;
 
 public class ImplementingSerializable {
 
@@ -20,42 +14,15 @@ public class ImplementingSerializable {
 		System.out.println("Before Serialization: ");
 		System.out.println(object);
 		
-		String serializedObj = writeObject(object);
+		String serializedObj = SerializationUtil
+				.writeObject(object);
 		System.out.println("After Serialization: ");
 		System.out.println(serializedObj);
 		
-		SerializableTemp deserializedObj = deserializeObject(serializedObj);
+		SerializableTemp deserializedObj = SerializationUtil
+				.deserializeObject(serializedObj);
 		System.out.println("After Deserialization: ");
 		System.out.println(deserializedObj);
-	}
-
-	@SuppressWarnings("unchecked")
-	private static <T> T deserializeObject(String serializedObj) {
-		
-		byte[] byteArr = Base64.getDecoder()
-				.decode(serializedObj);
-		try (ByteArrayInputStream in = new ByteArrayInputStream(byteArr);
-				ObjectInputStream input = new ObjectInputStream(in);) {
-			return (T) input.readObject();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private static String writeObject(SerializableTemp object) {
-		
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		try (ObjectOutputStream output = new ObjectOutputStream(out);) {
-			output.writeObject(object);
-			return Base64.getEncoder()
-					.encodeToString(out.toByteArray());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }
 /**
